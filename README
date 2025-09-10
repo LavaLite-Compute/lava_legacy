@@ -1,0 +1,148 @@
+# README for Platform Lava 1.0 (2007)
+# Copyright (C) 2007 Platform Computing Inc
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of version 2 of the GNU General Public License as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+#
+
+=============================
+Contents
+=============================
+
+1. Introduction
+2. Directory Structure
+3. Build Instruction
+4. Notes
+
+=============================
+1. Introduction
+=============================
+
+Lava is a load sharing and distributed batch queueing software that
+integrates a network of computers running UNIX systems.  It consists
+of the following components:
+
+Lava Base:
+    The software upon which all the other components are based. It
+    includes two servers, the Load Information Manager (LIM) and
+    the Remote Execution Server  (RES).
+
+Lava Batch:
+    The set of utilities providing batch job scheduling for distributed
+    environments, ensuring optimal resource sharing. It includes the
+    master and slave batch daemons (mbatchd and sbatchd).
+
+=============================
+2. Directory Structure
+=============================
+
+The contents of directories are:
+
+README: This file.
+
+Makefile:
+        Make(1) control file for compiling the source.
+
+config.h
+        Internal include file for handling platform dependent
+        prototype definitions.
+
+config/
+        Make.def.<os> for compilation on different platforms. Right now,
+        linux2.6-glibc2.3-x86 only.
+
+lsf/
+        Source code for building the Lava base daemons and tools, including
+        the lim, pim, res, nios, and all ls* commands.
+
+lsbatch/
+        Source code for building the Lava batch scheduling daemons and tools,
+        including the mbatchd, sbatchd, and all b* commands.
+
+eauth/
+        Source code for building the external authentication daemon
+
+chkpnt/
+        Source code for building generic echkpnt and erestart framework
+
+=============================
+3. Build Instruction
+=============================
+
+-----------------------------
+3.1 Build Dependency
+-----------------------------
+
+Lava requires the TCL 8.4 (or later) development libraries and headers.
+
+Following are the instructions to build and install tcl library and
+headers.
+
+1. Download Tcl source release (e.g. tcl8.4.15-src.tar.gz)
+       from http://downloads.sourceforge.net/tcl
+2. Untar the package
+3. cd tcl8.4.15/unix
+4. ./configure --disable-shared
+5. make
+6. make install
+
+
+This will install tcl header files in /usr/local/include/ and tcl library
+files in /usr/local/lib.
+
+
+-----------------------------
+3.2 Supported Platforms
+-----------------------------
+
+RHEL 4 x86 (linux2.6 glibc2.3 x86)
+
+-----------------------------
+3.3 Build Steps
+-----------------------------
+
+Build Instructions
+
+For x86 builds:
+
+1. Check config/Make.def.linux2.6-glibc2.3-x86 file to ensure following
+   parameters point to appropriate TCL header and library
+
+   TCL_INCLUDE
+   TCL_LIB
+   TCL_VERSION
+
+2. Build by using steps below:
+
+    bash# cp config/Make.def.linux2.6-glibc2.3-x86 Make.def
+    bash# make
+    bash# make brelease
+
+This will create a directory, lava1.0_linux2.6-glibc2.3-x86, that contains
+all of the Platform Lava binaries.
+
+=============================
+4. Notes
+=============================
+
+1. Lava eauth only provides the external authentication framework. Customer
+   needs to use their own encryption and decryption logic and pass external
+   authentication data using this framework.
+
+2. Platform Lava is not compatible with Platform LSF. Customer who needs
+   to upgrade from Lava to LSF must drain all the jobs before upgrading. After
+   Platform LSF installation, user needs to copy over all the configuration
+   files (and setting). Accounting file and Event file can not be upgraded to
+   Platform LSF.
+
+

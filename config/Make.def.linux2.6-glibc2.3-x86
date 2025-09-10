@@ -1,0 +1,34 @@
+# $Header: /cvs/CVS/lava_test/config/Make.def.linux2.6-glibc2.3-x86,v 1.15 2007/08/14 18:16:25 tmizan Exp $
+############################################################################
+# Makefile definitions for Load Sharing Facility
+#
+# Make.def for all Intel Linux 2.6 using glibc2.3
+#
+# gcc version :
+# gcc version 3.2.3 20030502 (Red Hat Linux 3.2.3-47.3)
+###########################################################################
+
+# DEFINITIONS FOR LOCAL COMPILING
+
+# Host type. The value should be short, unique, descriptive, usually uppercase
+# and a valid C name (alphanumeric, starting from letter)
+HOSTTYPE = LINUX86
+
+LM_ARCH = linux2.6-glibc2.3-x86
+RANLIB=true
+TAROPTS = chf
+LARGE_RLIMIT_SUPPORT=-D_FILE_OFFSET_BITS=64
+TCL_INCLUDE = /usr/local/include/
+EXTERN_CFLAGS = -pipe -DINTER_DAEMON_AUTH ${LARGE_RLIMIT_SUPPORT} -I/usr/include/tirpc
+BSDLIB = -lnsl -ltirpc
+TERMCAPLIB = /usr/lib64/libncurses.so
+LDLLIB = -ldl -ltirpc
+TCL_VERSION = 8.6
+TCLLIB = /usr/local/lib/libtcl${TCL_VERSION}.$(LEXS)
+
+#CC = gcc -Wall -Werror -g ${DATE}
+CC = gcc -Wall -g ${DATE}
+
+EXTERN_LDFLAGS = cru $(LIB)
+LD = ar
+LIB_OTHER = $(RANLIB) $@

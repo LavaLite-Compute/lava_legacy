@@ -1,0 +1,28 @@
+# $Id: TMPL.lsf.cluster,v 1.2 2007/08/01 18:02:44 bill Exp $
+#-----------------------------------------------------------------------
+# T H I S   I S   A    O N E   P E R   C L U S T E R    F I L E
+#
+# This is a sample cluster definition file.  There is a cluster
+# definition file for each cluster.  This file's name should be 
+# lsf.cluster.<cluster-name>.  
+# See lsf.cluster(5) and the "LSF Administrator's Guide".
+#
+
+Begin   ClusterAdmins
+Administrators = @MANAGER@
+End    ClusterAdmins 
+
+Begin	Host
+HOSTNAME  model    type        server r1m  mem  swp  RESOURCES    #Keywords
+#lemon    PC200    LINUX        1     3.5  1    2   (linux)
+End     Host
+
+Begin Parameters
+End Parameters
+
+# Begin ResourceMap
+# RESOURCENAME  LOCATION
+# tmp2	        [default]
+# nio	        [all]
+# console	[default]
+# End ResourceMap

@@ -1,0 +1,67 @@
+# $Id: TMPL.lsf.shared,v 1.2 2007/08/01 18:02:44 bill Exp $
+
+# ----------------------------------------------------------------------
+# T H I S   F I L E:  Is shared by all clusters in the LSF system.
+#
+# This file contains all definitions referenced by individual 
+# lsf.cluster.<clustername> files. The definitions in this file can be
+# a superset, i.e., not all definitions in this file need to be used in
+# other files. 
+#
+# See lsf.cluster(5) and "LSF User's and Admonistrator's Guide".
+# ----------------------------------------------------------------------
+
+Begin Cluster
+ClusterName			# Keyword
+#white				# Example
+End Cluster
+
+Begin HostType
+TYPENAME                        # Keyword
+DEFAULT		                # used by lsfsetup
+LINUX
+End HostType
+
+
+#
+# The CPU factor values are derived from SPECfp95 given by hardware vendors
+# or SpecBench (unless indicated otherwise)
+# See http://www.specbench.org for more information on CPU benchmarking
+# To find out an architecture string for a new model, run 'lim -t'
+#
+Begin HostModel
+MODELNAME  CPUFACTOR   ARCHITECTURE # keyword
+# x86 (Solaris, NT, Linux): approximate values, based on SpecBench results
+# for Intel processors (Sparc/NT) and BogoMIPS results (Linux).
+#PC75             1.5   (i86pc_75  i586_75  x586_30)
+#PC90             1.7   (i86pc_90  i586_90  x586_34 x586_35 x586_36)
+#PC100            2.0   (i86pc_100 i586_100 x586_39 x586_40)
+#PC133            2.5   (i86pc_133 i586_133 x586_53 x586_54)
+#PC150            3.5   (i86pc_150 i586_150 x586_60)
+#PC166            4.0   (i86pc_166 i586_166 x586_66 x586_67)
+PC200            4.5   (i86pc_200 i586_200 x586_79 x586_80 x586_81)
+PC233            6.0   (i86pc_233 i686_233)
+PC266            7.5   (i86pc_266 i686_266)
+PC300            8.3   (i86pc_300 i686_300)
+PC333            9.5   (i86pc_333 i686_333)
+PC350           11.0   (i86pc_350 i686_350)
+PC400           13.0   (i86pc_400 i686_400)
+PC450           13.2   (i86pc_450 i686_450)
+PC1133          23.1   (x6_1189_PentiumIIICoppermine)
+# For compatibility with old host models
+DEFAULT           1.0          ()   # used by lsfsetup
+End HostModel
+
+Begin Resource
+RESOURCENAME  TYPE    INTERVAL INCREASING  DESCRIPTION 	      # Keywords
+   bsd        Boolean ()       ()          (BSD unix)		
+   sysv       Boolean ()       ()	   (System V UNIX)
+   frame      Boolean ()       ()          (Hosts with FrameMaker licence)
+   bigmem     Boolean ()       ()          (Hosts with very big memory)
+   diskless   Boolean ()       ()          (Diskless hosts) 	
+   linux      Boolean ()       ()          (LINUX UNIX) 
+#  tmp2       Numeric 60       N           (Disk space in /usr/tmp in Mbytes)
+#  nio        Numeric 60       Y           (Network I/O in Kbytes/second)
+#  console    String  60       ()          (Console user name)
+End Resource
+
