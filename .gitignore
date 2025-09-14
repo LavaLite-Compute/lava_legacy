@@ -56,3 +56,5 @@ core
 *.vscode/
 *.idea/
 
+# Ignore cscope
+cscope*

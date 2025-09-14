@@ -21,45 +21,45 @@
 #include "lproto.h"
 #include "lib.osal.h"
 
-int
+    int
 osInit_(void)
 {
     static char first=TRUE;
     if (first) {
-       chanInit_();
-       first=FALSE;
+        chanInit_();
+        first=FALSE;
     }
     return(0);
 }
 
-char *
+    char *
 osPathName_(char *pathname)
 {
-   return(pathname);
-} 
+    return(pathname);
+}
 
-char *
+    char *
 osHomeEnvVar_(void)
 {
     return(getenv("HOME"));
-} 
+}
 
-void
+    void
 osConvertPath_(char *pathname)
 {
-   register int i;
-   for(i=0;pathname[i] != '\0' && i < MAXPATHLEN; i++) {
-      if (pathname[i] == '\\')
-         pathname[i]='/';
-   }
-   return;
+    register int i;
+    for(i=0;pathname[i] != '\0' && i < MAXPATHLEN; i++) {
+        if (pathname[i] == '\\')
+            pathname[i]='/';
+    }
+    return;
 
-} 
+}
 
-int
+    int
 osProcAlive_(int pid)
 {
     return(kill(pid, 0));
 
-} 
+}
 
