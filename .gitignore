@@ -1,4 +1,6 @@
 CVS
+lsfint.a
+lsflib.a
 lim
 res
 sbatchd
@@ -16,7 +18,6 @@ lsload
 lsmon
 lsplace
 lsrcp
-lstools
 badmin
 badmin
 bbot
